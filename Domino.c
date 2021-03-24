@@ -61,7 +61,7 @@ int selecionaJogadorInicial(Game *game){
 	int maxId[game->NJogadores];
 	bool stop;
 
-	for(i=0; i<=game->NJogadores;i++){//inicializando vetor auxiliar
+	for(i=0; i<=game->NJogadores;i++){
 		max[i]=-1;
 	}
 	
@@ -93,7 +93,6 @@ int selecionaJogadorInicial(Game *game){
 		}
 	}
 	
-
 	njg=0;
 	
 	if(maiorCod==-1){
@@ -110,19 +109,13 @@ int selecionaJogadorInicial(Game *game){
 			IdMelhorPeca=i;
 		}
 	}
-	
 	}while(njg!=game->NJogadores && njg++);	
-	
-
 }
-
 	game->JogadorJogando=maiorCod;
-	printf("\nCONSOLE: %d (%d ,%d )\n",game->jogadores[maiorCod].pack[IdMelhorPeca].id,game->jogadores[maiorCod].pack[IdMelhorPeca].numeroEsq,game->jogadores[maiorCod].pack[IdMelhorPeca].numeroDir);
 return IdMelhorPeca;
 }
 
 void mostrarPecas(Peca pecas[], int quantidadePecas){
-
 	int cont=0;
 	//printf("\nQuantidade de Pecas: %d\n",quantidadePecas);
 	for(cont=0;cont<quantidadePecas && cont<20;cont++)
@@ -321,7 +314,6 @@ int sortear(Peca pecas[28], int tamanhoVetor, Jogador *jogador){
 	int nSorteados=0;
 	int i,j;
 	
-	
 	if(tamanhoVetor<=7){		
 		for( i=0; i<7; i++){
 			jogador->pack[i].id = pecas[i].id;	
@@ -351,10 +343,8 @@ int sortear(Peca pecas[28], int tamanhoVetor, Jogador *jogador){
 			sorteados[nSorteados]=sorteado;
 			removePeca(pecas,sorteado,tamanhoVetor);
 			tamanhoVetor--;
-		}
-		}
-		//mostrarPecas(jogador->pack,jogador->qtdPecas);
-		
+			}
+		}		
 	}			
 	return tamanhoVetor;
 }
@@ -377,7 +367,7 @@ int removePeca( Peca vetor[28], int posicao, int tamanhoAtual){
 	} 
 	
 int inserePeca(Peca vetor[28], int tamanhoAtual){
-		int i,x;
+	int i,x;
 	Peca temp;
 	temp=vetor[tamanhoAtual];
 	for(i=tamanhoAtual;i>=0;i--){
@@ -388,9 +378,7 @@ int inserePeca(Peca vetor[28], int tamanhoAtual){
 	
 
 
-void jogarPeca(Game *game, Jogador *jogador, int PosicaoPeca, int sentido){
-	//printf("\nEsquerda: %d - Direita: %d -- \n",game->pecasEmJogo[0].numeroEsq,game->pecasEmJogo[0].numeroDir);
-	
+void jogarPeca(Game *game, Jogador *jogador, int PosicaoPeca, int sentido){	
 	if(jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[0].numeroDir ||
 	 jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[0].numeroEsq || 
 	 jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[0].numeroEsq ||
@@ -401,56 +389,56 @@ void jogarPeca(Game *game, Jogador *jogador, int PosicaoPeca, int sentido){
 	 jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[game->NPecasEmJogo-1].numeroEsq || 
 	 game->NPecasEmJogo == 0){
 	
-	int NPecasEmJogo = game->NPecasEmJogo;
-	
-	if(game->NPecasEmJogo==0){
-		game->pecasEmJogo[NPecasEmJogo].numeroDir = jogador->pack[PosicaoPeca].numeroEsq;
-		game->pecasEmJogo[NPecasEmJogo].numeroEsq = jogador->pack[PosicaoPeca].numeroDir;
-		game->pecasEmJogo[NPecasEmJogo].id = jogador->pack[PosicaoPeca].id;
-	}
-	
-	if(sentido==0){
-		if(jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[0].numeroDir ||
-	 		jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[0].numeroEsq ||
-			 jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[0].numeroEsq ||
-	 		jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[0].numeroDir){
-	 			if(jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[0].numeroEsq){	
-					game->pecasEmJogo[NPecasEmJogo].numeroDir = jogador->pack[PosicaoPeca].numeroEsq;
-					game->pecasEmJogo[NPecasEmJogo].numeroEsq = jogador->pack[PosicaoPeca].numeroDir;
-				}else if(jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[0].numeroEsq){
-					game->pecasEmJogo[NPecasEmJogo].numeroDir = jogador->pack[PosicaoPeca].numeroDir;
-					game->pecasEmJogo[NPecasEmJogo].numeroEsq = jogador->pack[PosicaoPeca].numeroEsq;	
-			}
-		game->pecasEmJogo[NPecasEmJogo].id = jogador->pack[PosicaoPeca].id;
+		int NPecasEmJogo = game->NPecasEmJogo;
+		
+		if(game->NPecasEmJogo==0){
+			game->pecasEmJogo[NPecasEmJogo].numeroDir = jogador->pack[PosicaoPeca].numeroEsq;
+			game->pecasEmJogo[NPecasEmJogo].numeroEsq = jogador->pack[PosicaoPeca].numeroDir;
+			game->pecasEmJogo[NPecasEmJogo].id = jogador->pack[PosicaoPeca].id;
 		}
-	}else{
-			if(jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir ||
-	 		jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[game->NPecasEmJogo-1].numeroEsq ||
-			 jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[game->NPecasEmJogo-1].numeroEsq ||
-	 		jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir){
-	 			
-	 			if(jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir){
-
-					game->pecasEmJogo[NPecasEmJogo].numeroDir = jogador->pack[PosicaoPeca].numeroEsq;
-					game->pecasEmJogo[NPecasEmJogo].numeroEsq = jogador->pack[PosicaoPeca].numeroDir;
-				}else if(jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir){
-					game->pecasEmJogo[NPecasEmJogo].numeroDir = jogador->pack[PosicaoPeca].numeroDir;
-					game->pecasEmJogo[NPecasEmJogo].numeroEsq = jogador->pack[PosicaoPeca].numeroEsq;	
+		
+		if(sentido==0){
+			if(jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[0].numeroDir ||
+		 		jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[0].numeroEsq ||
+				 jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[0].numeroEsq ||
+		 		jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[0].numeroDir){
+		 			if(jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[0].numeroEsq){	
+						game->pecasEmJogo[NPecasEmJogo].numeroDir = jogador->pack[PosicaoPeca].numeroEsq;
+						game->pecasEmJogo[NPecasEmJogo].numeroEsq = jogador->pack[PosicaoPeca].numeroDir;
+					}else if(jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[0].numeroEsq){
+						game->pecasEmJogo[NPecasEmJogo].numeroDir = jogador->pack[PosicaoPeca].numeroDir;
+						game->pecasEmJogo[NPecasEmJogo].numeroEsq = jogador->pack[PosicaoPeca].numeroEsq;	
+				}
+			game->pecasEmJogo[NPecasEmJogo].id = jogador->pack[PosicaoPeca].id;
 			}
-		game->pecasEmJogo[NPecasEmJogo].id = jogador->pack[PosicaoPeca].id;
-	}
-}
-
-
+		}else{
+				if(jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir ||
+		 		jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[game->NPecasEmJogo-1].numeroEsq ||
+				 jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[game->NPecasEmJogo-1].numeroEsq ||
+		 		jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir){
+		 			
+		 			if(jogador->pack[PosicaoPeca].numeroDir == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir){
 	
-	if(sentido==0){
-	inserePeca(game->pecasEmJogo,NPecasEmJogo);
+						game->pecasEmJogo[NPecasEmJogo].numeroDir = jogador->pack[PosicaoPeca].numeroEsq;
+						game->pecasEmJogo[NPecasEmJogo].numeroEsq = jogador->pack[PosicaoPeca].numeroDir;
+					}else if(jogador->pack[PosicaoPeca].numeroEsq == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir){
+						game->pecasEmJogo[NPecasEmJogo].numeroDir = jogador->pack[PosicaoPeca].numeroDir;
+						game->pecasEmJogo[NPecasEmJogo].numeroEsq = jogador->pack[PosicaoPeca].numeroEsq;	
+				}
+			game->pecasEmJogo[NPecasEmJogo].id = jogador->pack[PosicaoPeca].id;
+		}
 	}
-	removePeca(jogador->pack,PosicaoPeca,jogador->qtdPecas-1);
-	jogador->qtdPecas--;
-	game->NPecasEmJogo++;
+	
+	
+		
+		if(sentido==0){
+		inserePeca(game->pecasEmJogo,NPecasEmJogo);
+		}
+		removePeca(jogador->pack,PosicaoPeca,jogador->qtdPecas-1);
+		jogador->qtdPecas--;
+		game->NPecasEmJogo++;
 	}else{
-		printf("\nAVISO! Essa peca nao pode ser utilizada ai!\n");
+		printf("\n     AVISO! Essa peca nao pode ser utilizada ai!\n");
 	}
 }
 
@@ -467,9 +455,8 @@ void ComprarPeca(Game *game, Peca pecas[28], Jogador *jogador){
 	removePeca(pecas,sorteado,game->NPecas);
 	jogador->qtdPecas++;
 	game->NPecas--; 
-	printf("\n    COMPROU!!\n");
 	}else{
-		printf("\nAVISO! Não possui mais pecas para serem compradas!");
+		printf("\n   AVISO! Não possui mais pecas para serem compradas!");
 	}
 }
 
@@ -482,40 +469,31 @@ int mudarJogador(Game *game){
 }
 
 int vericaPecas(Game *game, Jogador *jogador){
-	int i,sorteio;
-	printf("\nPecas sobrando %d \n",game->NPecas);
-	
+	int i,sorteio;	
 		srand(time(NULL));
-
 		sorteio = rand() % 2;
-	
+
 	if(sorteio==0){
-			printf("\nCONSOLE: Normal\n");
 		for(i=0;i<jogador->qtdPecas;i++){
 	
 		if(jogador->pack[i].numeroDir == game->pecasEmJogo[0].numeroEsq || 
 		 jogador->pack[i].numeroEsq == game->pecasEmJogo[0].numeroEsq ){
-		 	printf("\nCONSOLE: Melhor Cima: (%d,%d) %d \n",jogador->pack[i].numeroEsq,jogador->pack[i].numeroDir,i);
 		 	return (1+(i*1));
 		 	
 		 }else if(jogador->pack[i].numeroDir == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir || 
 		 jogador->pack[i].numeroEsq == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir ){
-		 		printf("\nCONSOLE: Melhor Baixo: (%d,%d) %d \n",jogador->pack[i].numeroEsq,jogador->pack[i].numeroDir,i);
 		 	return ((i*-1)-1);
 		 }
 		}
 } else{
-		printf("\nCONSOLE: Invertido\n");
 			for(i=i<jogador->qtdPecas;i>=0;i--){
 	
 		if(jogador->pack[i].numeroDir == game->pecasEmJogo[0].numeroEsq || 
 		 jogador->pack[i].numeroEsq == game->pecasEmJogo[0].numeroEsq ){
-		 	printf("\nCONSOLE: Melhor Cima: (%d,%d) %d PONTOS: %d\n",jogador->pack[i].numeroEsq,jogador->pack[i].numeroDir,i,(1+(i*1)));
 		 	return (1+(i*1));
 		 	
 		 }else if(jogador->pack[i].numeroDir == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir || 
 		 jogador->pack[i].numeroEsq == game->pecasEmJogo[game->NPecasEmJogo-1].numeroDir ){
-		 		printf("\nCONSOLE: Melhor Baixo: (%d,%d) %d PONTOS: %d\n",jogador->pack[i].numeroEsq,jogador->pack[i].numeroDir,i,((i*-1)-1));
 		 	return ((i*-1)-1);
 		 }
 		}
@@ -526,7 +504,8 @@ int vericaPecas(Game *game, Jogador *jogador){
 	
 int verificarGanhador(Game *game){
 	int i,j,ganhador=-1,pontos=-1, maiorPontuacao=-1, menorPontuacao=-1,pontuacao, maiorVitorias=0;
-	
+	printf("\n%c----------------------------------------------------------------------",204);
+	printf("\n%c                           PLACAR:  ",204);
 	for(i=0;i<=game->NJogadores-1;i++){
 		pontuacao=0;
 
@@ -552,26 +531,27 @@ int verificarGanhador(Game *game){
 				}
 			}
 		}
-		
-			printf("\nSecao %d - Jogador %d Pecas = %d \n",game->id,i+1,game->jogadores[i].qtdPecas);
+
+			printf("\n%c Secao %d - Jogador %d Pecas = %d ",204,game->id,i+1,game->jogadores[i].qtdPecas);
 	}
-	
+	printf("\n%c----------------------------------------------------------------------",204);
 		
 		game->jogadores[ganhador].vitorias++;	
-		printf("\nGanhador da sessao: %d\n",ganhador);
+		printf("\n%c     Ganhador da sessao atual: %d",204,ganhador);
+		printf("\n%c----------------------------------------------------------------------",204);
 		ganhador=-1;
 		for(i=0;i<=game->NJogadores-1 && game->id>3;i++){
 		if(game->jogadores[i].vitorias>= maiorVitorias){
-			printf("\nSuposto Ganhardor! !");
 		maiorVitorias=game->jogadores[i].vitorias;
 		ganhador=i;
 	
 	}
-	printf("\nSecao %d - Jogador %d Possui = %d Vitorias\n",game->id,i+1,game->jogadores[i].vitorias);
+	printf("\n%c     Secao %d - Jogador %d Possui = %d Vitorias",204,game->id,i+1,game->jogadores[i].vitorias);
 	
 	}
-	
+
 		getch();
+	printf("\n%c-------------- PRECIONE ENTER PARA IR PARA PROXIMA SECAO ------------------",204);
 return ganhador;
 }
 	
@@ -586,24 +566,41 @@ int main(int argc, char *argv[]) {
 		
 
 	/** Criando a interface **/
-	printf("\n     DOMINO \n");
-	printf("Quantos Jogadores? ");
+	printf("\n%c================================================%c",201,187);
+	printf("\n%c                    DOMINO                      %c",186,186);
+	printf("\n%c                                                %c ",186,186);
+	printf("\n%c  Quantos Jogadores?                            %c",186,186);
+	printf("\n%c  --%c",186,32);
+	
 	scanf("%d",&QTDJogadores);
+
 	Jogador jogador[QTDJogadores];
 	game.NJogadores =QTDJogadores;
-	
+	printf("%c",186);
+	printf("\n%c",186);
 	do{
-		printf("(0) Player ou (1) BOT ? : ");
+		
+		printf("  (0) Player ou (1) BOT ? : ");
+		printf("\n%c  -- ",186);
 		scanf("%d",&jogador[i].tipo);
 		
 		if(jogador[i].tipo==0){
-		printf("Nome do Jogador %d: ",i+1);
+		printf("%c",186);
+		printf("\n%c  Nome do Jogador %d: ",186,i+1);
 		scanf("%s",&jogador[i].jogador);
 		}else{
 		snprintf(jogador[i].jogador, 10, "BOT %d",bot++);
 		
 		}
-		printf("\n Usuario Cadastrado!\n");
+		printf("%c",186);
+		printf("\n%c",186);
+		printf("\n%c",186);
+		printf("\n%c",186);
+		printf("               Usuario Cadastrado!");
+		printf("\n%c",186);
+		printf("\n%c",186);
+		printf("\n%c",186);
+		printf("\n%c",186);
 		i++;	
 	}while(i<game.NJogadores);
 	
@@ -619,96 +616,116 @@ int main(int argc, char *argv[]) {
 	finalista=-1;
 	/** Criando as Peças**/
 	criarPecas(pecas);
-	
-	
+	system("cls");
 	i=0;
-	printf("\n===================================================");
+	printf("\n%c===================================================",204);
 	do{
 	
-	printf("\nSorteando as pecas do Jogador %d",i+1);	
+	printf("\n%c  Sorteando as pecas do Jogador %d",186,i+1);	
 	game.NPecas=sortear(pecas,game.NPecas,&jogador[i]);	
 	Sleep(700);
-	printf("\nSorteio concluida... \n",i+1);	
-	printf("\n===================================================");
-	Sleep(700);
+	printf("\n%c  Sorteio concluida...  \n",186);	
+	printf("%c===================================================",204);
+	Sleep(850);
 	i++;
 	
 	}while(i<game.NJogadores);
-	
-	//system("cls");
+	Sleep(1000);
+	system("cls");
 	int inicio=1;
 
 		/** Início de jogo **/
 	int SelecionadaComecar = selecionaJogadorInicial(&game);	
 
 	jogarPeca(&game,&jogador[game.JogadorJogando],SelecionadaComecar,1);//0 = cima 1 = baixo
-
-	printf("\n Quem comecou foi Jogador %d\n",game.JogadorJogando+1);		
-	
+printf("\n%c======================================================================",204);
+	printf("\n%c Quem comecou foi Jogador %d",186,game.JogadorJogando+1);		
+printf("\n%c======================================================================",204);
+	printf("\n%c",186);
+	Sleep(1000);
 	int selecao,local;
 	bool jogou;
 	int  vezJogador;
 	do{
-		//system("cls");
+		system("cls");
 		jogou = false;
 		vezJogador = mudarJogador(&game);
-		//Sleep(1000);
-		do{
-	//	mostrarPecas(game.pecasEmJogo, game.NPecasEmJogo);
-		printf("\n Vez do Jogador  %d - %s\n",vezJogador+1,game.jogadores[vezJogador].jogador);
-		if(jogador[vezJogador].tipo==0){
 		
+		do{
+		printf("\n%c======================================================================",204);	
+		printf("\n%c  Pecas em jogo: ",186);	
+		printf("\n%c======================================================================\n",204);
+		mostrarPecas(game.pecasEmJogo, game.NPecasEmJogo);
+		if(jogador[vezJogador].tipo==0){
+			
+		
+		printf("\n%c======================================================================",204);
+		printf("\n%c Vez do Jogador  %d - %s -- Qtd Pecas: %d -- Podem ser compradas: %d",186,vezJogador+1,game.jogadores[vezJogador].jogador,game.jogadores[vezJogador].qtdPecas,game.jogadores[vezJogador].qtdPecas,game.NPecas);
+		printf("\n%c----------------------------------------------------------------------",204);
+		printf("\n%c Suas pecas: ",186);
+		printf("\n%c----------------------------------------------------------------------\n",204);
 		mostrarPecas(jogador[vezJogador].pack,jogador[vezJogador].qtdPecas);
 
 		if(vericaPecas(&game,&jogador[vezJogador])>-100){
-		printf("Peca: ");
+		printf("\n%c======================================================================",204);
+		printf("\n%c  -- Escolha a peca: ",186);
 		scanf("%d",&selecao);
-		printf(" Local?  (0) Cima  (1) Baixo: ");
+		printf("%c%c  --  Qual local deseja inserir essa peca?  (0) Cima  (1) Baixo: ",186);
 		scanf("%d",&local);
+		printf("\n%c----------------------------------------------------------------------",204);
 		jogarPeca(&game,&jogador[vezJogador],selecao-1,local);
 		jogou=true;
 		//system("cls");
 		limite=0;
 	}else if(game.NPecas>0){
-			printf(" \nPrecisa Comprar!\n");
+		printf("\n%c----------------------------------------------------------------------",204);
+			printf("\n%c  Jogador %s Precisa Comprar! ",186,jogador[vezJogador].jogador );
+			printf("\n%c----------------------------------------------------------------------",204);
 			ComprarPeca(&game, pecas, &jogador[vezJogador]);
 			Sleep(2000);
 			limite=0;
 		
 	}else{
-		printf(" \nPassou!! \n");
+		printf("\n%d  Passou a vez!! ",186);
+		printf("\n%c----------------------------------------------------------------------",204);
 		limite++;
 		jogou=true;
 	}
 	
 	}else{
-			printf(" \n----------------------------------------------------\n");
-		printf(" \nBOT JOGANDO... %s\n",game.jogadores[vezJogador].jogador);
+		printf("\n%c======================================================================",204);
+		printf("\n%c  BOT JOGANDO... %s  -- Qtd Pecas: %d -- Podem ser compradas: %d",186,game.jogadores[vezJogador].jogador,game.jogadores[vezJogador].qtdPecas,game.NPecas);
+		printf("\n%c----------------------------------------------------------------------",204);
+		
 		int posicao=vericaPecas(&game,&jogador[vezJogador]);
 		if(posicao!=-100){
 			if(posicao<=0){	
-				printf(" \nJogador Adversario Jogou uma nova peca!\n");	
-				printf("\nCONSOLE: Jogado: BAIXO(%d,%d) Peca: %d - Peca s corv: %d \n",game.jogadores[vezJogador].pack[posicao*-1-1].numeroEsq,game.jogadores[vezJogador].pack[posicao*-1-1].numeroDir,(posicao*-1)-1,posicao);	
+
+				printf("\n%c Jogador Adversario Jogou uma nova peca!",186);	
+				printf("\n%c----------------------------------------------------------------------",204);
 				jogarPeca(&game,&jogador[vezJogador],(posicao*-1)-1,1);
 				
 				jogou=true;
 			}else{
-				printf(" \nJogador Adversario Jogou uma nova peca!\n");
-				printf("\nCONSOLE: Jogado: CIMA(%d,%d)  Peca: %d - Peca s corv: %d \n",game.jogadores[vezJogador].pack[posicao*1-1].numeroEsq,game.jogadores[vezJogador].pack[posicao*1-1].numeroDir,posicao-1,posicao);
+				
+				printf("\n%c Jogador Adversario Jogou uma nova peca!",186);
+				printf("\n%c----------------------------------------------------------------------",204);
 				jogarPeca(&game,&jogador[vezJogador],posicao-1,0);
 				
 				jogou=true;
 		}
 			limite=0;
-		//	Sleep(2000);
+			Sleep(2000);
 		}else if(game.NPecas>0){
-			printf(" \nJogador Adversario Precisa Comprar! %d\n",posicao);
+			printf("\n%c Jogador Adversario Precisa Comprar! ",186);
+			printf("\n%c----------------------------------------------------------------------",204);
 			ComprarPeca(&game, pecas, &jogador[vezJogador]);
 			jogou=false;
-		//	Sleep(2000);
+			Sleep(2000);
 			limite=0;
 	}else{
-		printf(" \nPassou!! \n");
+		printf("\n%d  Passou a vez!! ",186);
+		printf("\n%c----------------------------------------------------------------------",204);
 		limite++;
 		jogou=true;
 	}
@@ -716,8 +733,7 @@ int main(int argc, char *argv[]) {
 	if(jogador[vezJogador].qtdPecas==0)
 	inicio=0;
 	
-	printf(" \nCONSOLE: Limite:%d\n",limite);
-	//system("cls");	
+
 	}
 	
 	}while(jogou==false);
